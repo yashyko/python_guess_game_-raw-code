@@ -1,28 +1,2 @@
-# python_guess_game_-raw-code
-the code:
-import random
 
-number = random.randint(1, 20)
-attempts = 9
-
-while attempts > 0:
-    answer = input("Guess: ")
-    if not answer.isdigit():
-        print("Numbers only!")
-        continue
-    guess = int(answer)
-    if guess < 1 or guess > 20:
-        print("Pick a number from 1 to 20!")
-        continue
-    attempts = attempts - 1
-    if guess == number:
-        print("Correct!")
-        break
-    elif guess < number:
-        print("incorrect, try higher")
-    else:
-        print("incorrect, try lower")
-    print("Attempts left:", attempts)
-if guess != number:
-    print("Out of attempts! The number was", number)
     
