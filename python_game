@@ -1,26 +1,68 @@
+so hello welcome back, today im going to explain everething step-by-step so grab some popcorn and lets do this...
+```
+
 import random
 
-number = random.randint(1, 20)
-attempts = 9
 
-while attempts > 0:
-    answer = input("Guess: ")
-    if not answer.isdigit():
-        print("Numbers only!")
-        continue
-    guess = int(answer)
-    if guess < 1 or guess > 20:
-        print("Pick a number from 1 to 20!")
-        continue
-    attempts = attempts - 1
-    if guess == number:
-        print("Correct!")
-        break
-    elif guess < number:
-        print("incorrect, try higher")
-    else:
-        print("incorrect, try lower")
-    print("Attempts left:", attempts)
-if guess != number:
-    print("Out of attempts! The number was", number)
+def play(low=1, high=100):
+    # Pick a random number the player has to find.
+    secret = random.randint(low, high)
+    tries = 0
 
+    print(f"\nI'm thinking of a number between {low} and {high}.")
+
+    # Keep asking until they get it right or quit.
+    while True:
+        answer = input("Your guess: ").strip()
+
+        # Let them give up.
+        if answer in ("q", "quit", "exit"):
+            print(f"It was {secret}.")
+            return
+
+        # lstrip("-") so "-5" still counts as a number.
+        if not answer.lstrip("-").isdigit():
+            print("   That's not a number")
+            continue
+
+        guess = int(answer)
+        tries += 1  # only count real guesses, not typos
+
+        # Tell them which way to go.
+        if guess < secret:
+            print("   Higher")
+        elif guess > secret:
+            print("   Lower")
+        else:
+            # Correct - say how many tries it took.
+            print(f"\nGot it! {secret} in {tries} "
+                  f"{'try' if tries == 1 else 'tries'}.")
+            # 100 numbers can always be found in 7 halvings.
+            if tries <= 7:
+                print("   Nice - that's about as good as it gets.")
+            return
+
+
+def main():
+    print("=" * 34)
+    print("     NUMBER GUESSING GAME")
+    print("=" * 34)
+
+    # Outer loop so they can play more than once.
+    while True:
+        play()
+        if input("\nPlay again? (y/n) ").strip().lower() not in ("y", "yes"):
+            print("Bye!")
+            return
+
+
+# Only run the game if this file is run directly,
+# not if something imports it.
+if __name__ == "__main__":
+    main()
+```
+
+so 1 these # lines are "comments" they are not nessesery... python ignores them and theyre just to help you to read it easy
+then import is an command that lets you to get some features such as random.randint and more
+next we have coding (that lines with things ) and for this project for now thats it
+bye see you next time (:
