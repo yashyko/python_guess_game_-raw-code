@@ -7,7 +7,7 @@ import random
 def play(low=1, high=100):
     # Pick a random number the player has to find.
     secret = random.randint(low, high)
-    tries = 0
+    tries = 5
 
     print(f"\nI'm thinking of a number between {low} and {high}.")
 
